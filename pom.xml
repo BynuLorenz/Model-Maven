@@ -124,7 +124,7 @@
 				<artifactId>maven-war-plugin</artifactId>
 				<configuration>
 					<warName>MavenSpring</warName>
-					<outputDirectory>D:\Tomcat\apache-tomcat-7.0.42\webapps</outputDirectory>
+					<outputDirectory>C:\apache-tomcat-7.0.42\webapps</outputDirectory>
 				</configuration>
 			</plugin>
 		</plugins>
