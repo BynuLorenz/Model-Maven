@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="maven-antrun-" default="MavenEclipseTute"  >
+<target name="MavenEclipseTute">
+  <taskdef resource="net/sf/antcontrib/antlib.xml" classpathref="maven.plugin.classpath"/>
+  <property file="build.properties"/>
+  <property location="src/main/webapp/" name="web.dir"/>
+  <property location="target/jars" name="dest.dir"/>
+  <property location="target" name="target.dir"/>
+  <property name="WarName" value="MavenSpring"/>
+  <mkdir dir="${dest.dir}/classes"/>
+  <mkdir dir="${dest.dir}/${subClient}"/>
+  <echo message="==================Compiling Java classes===================="/>
+  <javac destdir="${dest.dir}/classes" debug="true" srcdir="src" includes="main/java/com/springmaven/test/**">
+    <classpath refid="maven.dependency.classpath"/>
+  </javac>
+  <echo message="==================Generating banking-internet-admin.jar===================="/>
+  <jar basedir="${dest.dir}/classes" includes="com/springmaven/test/**" destfile="${dest.dir}/MavenSpring.jar"/>
+  <property name="dependancy_classpath" refid="maven.dependency.classpath"/>
+  <copy todir="${dest.dir}/lib" flatten="true">
+    <path>
+      <pathelement path="${dependancy_classpath}"/>
+    </path>
+  </copy>
+  <echo message="==================Prepare files for ${subClient}===================="/>
+  <echo message="==================Deleting the folders===================="/>
+  <delete dir="${dest.dir}/classes"/>
+  <delete dir="${dest.dir}/lib"/>
+  <delete dir="${dest.dir}/${subClient}"/>
+  <copy todir="${tomcat-path}/webapps" file="${target.dir}/${WarName}"/>
+</target>
+</project>
